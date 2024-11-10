@@ -1,0 +1,15 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+header, footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f3f3f3;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+}
