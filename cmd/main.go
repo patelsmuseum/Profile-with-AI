@@ -46,6 +46,9 @@ func main() {
 			c.JSON(200, gin.H{"message": "Welcome to the API2!"})
 		})
 	}
-
-	router.Run(":8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	router.Run(":" + port)
 }
