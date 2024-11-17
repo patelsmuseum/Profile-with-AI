@@ -1,0 +1,85 @@
+/* File: css/header.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Header styling */
+header {
+    width: 100%; /* Full width */
+    background-color: #1c1f26; /* Dark theme background */
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Flex container for logo and auth links */
+header > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%; /* Prevent overflow */
+}
+
+/* Logo styling */
+header a img {
+    height: 50px;
+    border-radius: 8px;
+    max-width: 100%; /* Ensure the logo does not cause overflow */
+}
+
+/* Auth links container */
+.auth-links {
+    display: flex;
+    gap: 15px;
+}
+
+/* Button styling */
+button.btn {
+    background: linear-gradient(135deg, #00aaff, #0055ff); /* Blue gradient */
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect for buttons */
+button.btn:hover {
+    background: linear-gradient(135deg, #33ccff, #0077ff);
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Focus and active state */
+button.btn:focus,
+button.btn:active {
+    outline: none;
+    box-shadow: 0 0 10px #0077ff, 0 0 15px #0055ff;
+}
+
+/* Link styling reset */
+.auth-links a {
+    text-decoration: none;
+}
+
+/* Glowing effect on hover */
+.auth-links a button:hover {
+    box-shadow: 0 0 10px rgba(0, 175, 255, 0.7), 0 0 20px rgba(0, 85, 255, 0.5);
+}
+
+/* Make the header container fit the screen width */
+html,
+body {
+    width: 100%;
+    max-width: 100vw; /* Prevent horizontal overflow */
+}

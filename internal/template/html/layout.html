@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/v1/css/layout.css">
+</head>
+<body>
+    {{template "header.html" .}}
+    <div class="content">
+        {{ block "content" . }}{{ end }}
+    </div>
+    {{template "footer.html" .}}
+</body>
+</html>

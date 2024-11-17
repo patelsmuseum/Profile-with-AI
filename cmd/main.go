@@ -1,6 +1,7 @@
 package main
 
 import (
+	"html/template"
 	"net/http"
 	"os"
 	"web-service-apis/internal/controllers"
@@ -16,28 +17,32 @@ func main() {
 	// router.GET("/", func(c *gin.Context) {
 	// 	c.JSON(http.StatusOK, gin.H{})
 	// })
-	router.Static("/css", "internal/template/css")    //  /css will be served from internal/template/css
-	router.Static("/jss", "internal/template/jss")    //  /jss will be served from internal/template/jss
-	router.Static("/img", "internal/template/images") //  /img will be served from internal/template/img
-	router.LoadHTMLGlob("internal/template/html/*")
+
+	router.Static("/v1/css", "internal/template/css")    //  /css will be served from internal/template/css
+	router.Static("/v1/jss", "internal/template/jss")    //  /jss will be served from internal/template/jss
+	router.Static("/v1/img", "internal/template/images") //  /img will be served from internal/template/img
+	router.SetHTMLTemplate(template.Must(template.New("layout").ParseFiles(
+		"internal/template/html/layout.html",
+		"internal/template/html/header.html",     // Base layout
+		"internal/template/html/footer.html",     // Footer
+		"internal/template/html/homePage.html",   // Home page content
+		"internal/template/html/signupPage.html", // Signup page content
+		"internal/template/html/signinPage.html", // Signin page content
+	)))
 	router.GET("/", func(c *gin.Context) {
-		htmlContent, err := os.ReadFile("internal/template/html/homePage.html")
-		if err != nil {
-			logrus.Error("Error reading home page template:", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to load home page"})
-			return
-		}
-		c.Header("Content-Type", "text/html")
-		c.String(http.StatusOK, string(htmlContent))
+		c.HTML(http.StatusOK, "layout.html", gin.H{
+			"Title": "Home Page",
+		})
 	})
 	v1 := router.Group("/v1")
 	v1.Use()
 	{
 		signUpController := new(controllers.SignUpController)
-		v1.GET("/welcome", func(c *gin.Context) {
-			c.JSON(200, gin.H{"message": "Welcome to the API!"})
-		})
 		v1.GET("/signupPage", signUpController.SignUpPage)
+		v1.POST("/signup", signUpController.SignUp)
+		signInController := new(controllers.SignInController)
+		v1.GET("/signinPage", signInController.SignInPage)
+		// v1.POST("/signin", signInController.SignIn)
 	}
 
 	v2 := router.Group("/v2")

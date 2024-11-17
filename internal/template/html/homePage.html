@@ -1,29 +1,15 @@
-<html></html>
-    <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" href="css/home.css">
-    </head>
-    <body>
-        <header>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-               <a href="/">
-                    <img src="img/logo.jpeg" alt="Project Logo" style="height: 50px;"> 
-               </a> 
-
-                <a href="/v1/signupPage">
-                    <button id="signupButton" class="btn btn-primary" onclick="event.stopImmediatePropagation()">Sign Up</button> <!-- Signup button on the right -->
-                </a>
-            </div>
-        </header>
+{{ define "content" }}
+    {{ if eq .Title "Signup Page" }}
+        {{block "signupPage" .}} {{ end }}
+    {{ else if eq .Title "Sign In Page" }}
+        {{block "signinPage" .}} {{ end }}
+    {{ else }}
         <div id="content"class="main-content">  
             <button id="button1" class="btn btn-primary">Call API  Welcome</button>
             <a href="/v1/signupPage">
                 <button id="button2" class="btn btn-secondary" onclick="event.stopImmediatePropagation()">Another Action</button>
             </a>
         </div>
-        <footer>
-            <p>Copyright &copy; 2024 Our Company</p>
-        </footer>
-        <script src="jss/home.jss"></script>
-    </body>
-</html>
+    
+    {{ end }}
+{{ end }}

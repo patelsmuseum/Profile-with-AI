@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,9 +9,11 @@ import (
 type SignUpController struct{}
 
 func (ctrl SignUpController) SignUpPage(c *gin.Context) {
-	dir, err1 := filepath.Abs("./")
-	if err1 != nil {
-		fmt.Println(err1)
-	}
-	c.HTML(200, "signupPage.html", gin.H{"dir": dir})
+	c.HTML(200, "layout.html", gin.H{"Title": "Signup Page"})
+}
+
+func (ctrl SignUpController) SignUp(c *gin.Context) {
+	email := c.PostForm("email")
+	password := c.PostForm("password")
+	fmt.Println(email, password)
 }
