@@ -2,7 +2,7 @@
 <div class="signupPage">
     <link rel="stylesheet" href="/v1/css/signupPage.css">
     <h1>Sign Up</h1>
-    <form action="/v1/signup" method="post">
+    <form action="/v1/signup" method="post" id="signupForm">
         <label for="firstname">First Name:</label>
         <input type="text" id="firstname" name="firstname" required>
         <label for="lastname">Last Name:</label>
@@ -17,7 +17,18 @@
         <input type="password" id="confirmPassword" name="confirmPassword" required>
         <button type="submit">Sign Up</button>
     </form>
+    <p id="error-message" style="color: red;" ></p>
 </div>
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(event) {
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
+    if (password !== confirmPassword) {
+        document.getElementById('error-message').textContent = 'Passwords do not match.';
+        event.preventDefault(); // Prevent form submission
+    }
+});
+</script>
 {{ end }}
 
 

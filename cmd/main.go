@@ -5,14 +5,16 @@ import (
 	"net/http"
 	"os"
 	"web-service-apis/internal/controllers"
+	"web-service-apis/internal/database"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 )
 
 func main() {
-	logrus.Info("Hello, World!")
-	defer logrus.Info("Goodbye, World!")
+	logrus.Info("Starting the application...")
+	defer logrus.Info("Shutting down the application...")
+	database.InitDB()
 	router := gin.Default()
 	// router.GET("/", func(c *gin.Context) {
 	// 	c.JSON(http.StatusOK, gin.H{})
@@ -42,7 +44,7 @@ func main() {
 		v1.POST("/signup", signUpController.SignUp)
 		signInController := new(controllers.SignInController)
 		v1.GET("/signinPage", signInController.SignInPage)
-		// v1.POST("/signin", signInController.SignIn)
+		v1.POST("/signin", signInController.SignIn)
 	}
 
 	v2 := router.Group("/v2")
